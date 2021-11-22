@@ -8,7 +8,7 @@ const cors = require('cors');
 
 const NotFoundError = require('./errors/not-found-err');
 const users = require('./routes/users');
-const cards = require('./routes/cards');
+// const cards = require('./routes/cards');
 const { login } = require('./controllers/login');
 const { createUser } = require('./controllers/createUser');
 
@@ -51,11 +51,7 @@ app.post('/signin', celebrate({
 app.post('/signup', celebrate({
   body: Joi.object()
     .keys({
-      name: Joi.string().min(2).max(30),
-      about: Joi.string().min(2).max(30),
-      avatar: Joi.string().pattern(
-        /^((http|https):\/\/)(www\.)?([\w\W\d]{1,})(\.)([a-zA-Z]{1,10})([\w\W\d]{1,})?$/,
-      ),
+      name: Joi.string().min(2).max(30).required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
     })
@@ -66,7 +62,7 @@ app.use(requestLogger);
 app.use(auth);
 
 app.use('/users', users);
-app.use('/cards', cards);
+// app.use('/cards', cards);
 
 app.all('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
