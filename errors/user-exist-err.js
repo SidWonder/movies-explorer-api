@@ -1,0 +1,9 @@
+/* eslint-disable linebreak-style */
+class UserExistError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = 409;
+  }
+}
+
+module.exports = UserExistError;

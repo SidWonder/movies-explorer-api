@@ -1,0 +1,8 @@
+{
+    "rules": {
+      "no-underscore-dangle": ["error", {"allow":["_id"]}],
+      "linebreak-style": ["error", "unix"], //Вынужденный фикс - ругался на разрыв строк, пришлось поставить такое правило, но я пишу на винде, если подскажите почему так, то буду очень благодарен
+      "no-console": ["error", { "allow": ["log"] }]
+    },
+    "extends": "airbnb-base"
+  }
