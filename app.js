@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { celebrate, Joi, errors } = require('celebrate');
-const cors = require('cors');
+// const cors = require('cors');
 
 const NotFoundError = require('./errors/not-found-err');
 const users = require('./routes/users');
-// const cards = require('./routes/cards');
+const movies = require('./routes/movies');
 const { login } = require('./controllers/login');
 const { createUser } = require('./controllers/createUser');
 
@@ -62,7 +62,7 @@ app.use(requestLogger);
 app.use(auth);
 
 app.use('/users', users);
-// app.use('/cards', cards);
+app.use('/movies', movies);
 
 app.all('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));

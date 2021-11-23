@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('mongoose-type-url');
 
-const cardSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
   country: {
     type: String,
     required: true,
@@ -75,4 +75,4 @@ const cardSchema = new mongoose.Schema({
   versionKey: false,
 });
 
-module.exports = mongoose.model('movie', cardSchema);
+module.exports = mongoose.model('movie', movieSchema);

@@ -7,7 +7,7 @@ const UserExistError = require('../errors/user-exist-err');
 module.exports.createUser = (req, res, next) => {
   const {
     // eslint-disable-next-line no-unused-vars
-    name, about, avatar, email, password,
+    name, email, password,
   } = req.body;
   bcrypt.hash(req.body.password, 10)
     .then((hash) => {
@@ -15,13 +15,11 @@ module.exports.createUser = (req, res, next) => {
         .then((searchedUser) => {
           if (!searchedUser) {
             User.create({
-              name, about, avatar, email, password: hash,
+              name, email, password: hash,
             })
               .then((user) => res.send({
                 _id: user._id,
                 name: user.name,
-                about: user.about,
-                avatar: user.avatar,
                 email: user.email,
               }));
           } else {

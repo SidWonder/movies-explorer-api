@@ -37,9 +37,9 @@ module.exports.getUser = (req, res, next) => {
 };
 
 module.exports.updateProfile = (req, res, next) => {
-  const { name, about } = req.body;
+  const { name, email } = req.body;
   console.log(req.user._id);
-  User.findByIdAndUpdate(req.user._id, { name, about }, {
+  User.findByIdAndUpdate(req.user._id, { name, email }, {
     new: true,
     runValidators: true,
     upsert: false,
@@ -49,30 +49,6 @@ module.exports.updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Такой карточки нет в базе'));
-      }
-      if (err.name === 'ValidationError') {
-        next(new UncorectDataError('Данные для обновления вашего профиля введены с ошибкой, пожалуйста, проверьте поля и значения'));
-      }
-      if (err.name === 'CastError') {
-        next(new UncorectDataError('Такого пользователя несуществует, проверьте ID пользователя'));
-      }
-      next(err);
-    });
-};
-
-module.exports.updateAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-  console.log(avatar);
-  User.findByIdAndUpdate(req.user._id, { avatar }, {
-    new: true,
-    runValidators: true,
-    upsert: false,
-  })
-    .orFail(new Error('NotValidId'))
-    .then((user) => res.send({ user }))
-    .catch((err) => {
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Такого пользователя нет в базе'));
       }
       if (err.name === 'ValidationError') {
         next(new UncorectDataError('Данные для обновления вашего профиля введены с ошибкой, пожалуйста, проверьте поля и значения'));
