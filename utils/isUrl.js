@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const validator = require('validator');
 
 function isURL(url) {

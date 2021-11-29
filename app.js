@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { celebrate, Joi, errors } = require('celebrate');
-// const cors = require('cors');
 
 const NotFoundError = require('./errors/not-found-err');
 const users = require('./routes/users');
@@ -19,7 +18,8 @@ const corsOptions = require('./middlewares/cors');
 const { PORT = 3000 } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+const { MONGODB } = process.env;
+mongoose.connect(MONGODB, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,

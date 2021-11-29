@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 class DefaultError extends Error {
   constructor(message) {
     super(message);

@@ -6,7 +6,6 @@ const UserExistError = require('../errors/user-exist-err');
 
 module.exports.createUser = (req, res, next) => {
   const {
-    // eslint-disable-next-line no-unused-vars
     name, email, password,
   } = req.body;
   bcrypt.hash(req.body.password, 10)

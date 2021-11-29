@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const Movie = require('../models/movies');
 
 const UncorectDataError = require('../errors/uncorect-data-err');
