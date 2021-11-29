@@ -1,6 +1,6 @@
 const allowedCors = [
   'http://localhost:3000',
-  'https://sidwonder.mesto.nomoredomains.club',
+  'https://sidwonder.diploma.nomoredomains.rocks',
 ];
 
 module.exports = (req, res, next) => {
