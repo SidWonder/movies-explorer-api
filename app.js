@@ -19,7 +19,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 const { MONGODB, NODE_ENV } = process.env;
-const DBPATH = NODE_ENV === 'production' ? MONGODB : 'mongodb://localhost:27017/bitfilmsdb';
+const DBPATH = NODE_ENV === 'production' ? MONGODB : 'mongodb://localhost:27017/moviesdb';
 mongoose.connect(DBPATH, {
   useNewUrlParser: true,
   useCreateIndex: true,

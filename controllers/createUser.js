@@ -31,14 +31,16 @@ module.exports.createUser = (req, res, next) => {
           }
           if (err.name === 'ValidationError') {
             next(new UncorectDataError('Данные для создания пользователя введены с ошибкой, пожалуйста, проверьте поля и значения'));
+          } else {
+            next(err);
           }
-          next(err);
         });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new UncorectDataError('Данные для создания пользователя введены с ошибкой, пожалуйста, проверьте поля и значения'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
