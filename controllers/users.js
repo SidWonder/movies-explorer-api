@@ -47,7 +47,6 @@ module.exports.updateProfile = (req, res, next) => {
     .orFail(new Error('NotValidId'))
     .then((user) => res.send({ user }))
     .catch((err) => {
-      console.log(err.message);
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Такой карточки нет в базе'));
       }
