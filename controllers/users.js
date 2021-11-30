@@ -2,6 +2,7 @@ const User = require('../models/users');
 const NotFoundError = require('../errors/not-found-err');
 const DefaultError = require('../errors/default-err');
 const UncorectDataError = require('../errors/uncorect-data-err');
+const UserExistError = require('../errors/user-exist-err');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -46,6 +47,7 @@ module.exports.updateProfile = (req, res, next) => {
     .orFail(new Error('NotValidId'))
     .then((user) => res.send({ user }))
     .catch((err) => {
+      console.log(err.message);
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Такой карточки нет в базе'));
       }
@@ -54,6 +56,9 @@ module.exports.updateProfile = (req, res, next) => {
       }
       if (err.name === 'CastError') {
         next(new UncorectDataError('Такого пользователя несуществует, проверьте ID пользователя'));
+      }
+      if (err.name === 'MongoError' && err.code === 11000) {
+        next(new UserExistError('Данным email уже используется другим пользователем'));
       }
       next(err);
     });
